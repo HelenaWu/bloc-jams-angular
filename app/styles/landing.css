@@ -33,7 +33,7 @@ body.landing{
     position: relative;
     padding: 2rem;
     text-align: center;
-    opacity: 0; /*on page load, this element will not be visible */
+    opacity: 1; /*on page load, this element will not be visible */
     -webkit-transform: scaleX(0.9) translateY(5rem); /*scale element to 90% of width, 3rem down*/
     -moz-transform: scaleX(0.9) translateY(5rem);
     transform: scaleX(0.9) translateY(5rem);
