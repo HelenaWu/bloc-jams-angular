@@ -24,10 +24,11 @@
             });
             currentBuzzObject.bind('timeupdate', function(){
                 $rootScope.$apply(function(){
-                    SongPlayer.currentTime = currentBuzzObject.getTime();
+                    SongPlayer.currentTime = buzz.toTimer(currentBuzzObject.getTime());
                 });
             });
             SongPlayer.currentSong = song;
+            SongPlayer.currentSong.duration = buzz.toTimer(SongPlayer.currentSong.duration);
         };
         var getSongIndex = function(song){
             return currentAlbum.songs.indexOf(song);
