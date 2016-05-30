@@ -13,6 +13,7 @@
         *@param {Object} song        
         */
         var setSong = function(song){
+            SongPlayer.currentSong = song;
             if (currentBuzzObject){
                 currentBuzzObject.stop();
                 SongPlayer.currentSong.playing = null;
@@ -24,11 +25,12 @@
             });
             currentBuzzObject.bind('timeupdate', function(){
                 $rootScope.$apply(function(){
-                    SongPlayer.currentTime = buzz.toTimer(currentBuzzObject.getTime());
+                    SongPlayer.currentTime = currentBuzzObject.getTime();
                 });
             });
-            SongPlayer.currentSong = song;
-            SongPlayer.currentSong.duration = buzz.toTimer(SongPlayer.currentSong.duration);
+            currentBuzzObject.bind('ended', function(){
+                SongPlayer.next();
+            });
         };
         var getSongIndex = function(song){
             return currentAlbum.songs.indexOf(song);
@@ -69,7 +71,6 @@
               currentBuzzObject.setTime(time);
           }
         };
-        
         /**
         *@desc volume of the current playing song, 0-100
         *@type {Number}

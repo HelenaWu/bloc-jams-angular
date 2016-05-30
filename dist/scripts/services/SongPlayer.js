@@ -22,12 +22,8 @@
                 formats: ['mp3'] ,
                 preload: true
             });
-            currentBuzzObject.bind('timeupdate', function(){
-                $rootScope.$apply(function(){
-                    SongPlayer.currentTime = currentBuzzObject.getTime();
-                });
-            });
             SongPlayer.currentSong = song;
+            SongPlayer.currentSong.duration = buzz.toTimer(SongPlayer.currentSong.duration);
         };
         var getSongIndex = function(song){
             return currentAlbum.songs.indexOf(song);
@@ -68,7 +64,14 @@
               currentBuzzObject.setTime(time);
           }
         };
-        
+        /*???*/
+        SongPlayer.bindScope = function($scope){
+            currentBuzzObject.bind('timeupdate', function(){
+                $scope.$apply(function(){
+                    SongPlayer.currentTime = buzz.toTimer(currentBuzzObject.getTime());
+                });
+            });
+        }
         /**
         *@desc volume of the current playing song, 0-100
         *@type {Number}
