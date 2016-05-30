@@ -103,6 +103,17 @@
             currentBuzzObject.pause();
             song.playing = false;
         }
+        SongPlayer.isMuted = function(){
+            if (currentBuzzObject){
+                return currentBuzzObject.isMuted();
+            }else{
+                return false;
+            }
+        }
+        SongPlayer.toggleMute = function(){
+            
+          currentBuzzObject.toggleMute();  
+        };
         /**
         *@function previous
         *@desc play the previous song, if the index falls out of range then stop the song
